@@ -1,10 +1,11 @@
 #include <ch.h>
 #include <hal.h>
+#include "encoder.h"
 
 
 uint32_t encoder_get_primary(void)
 {
-    return STM32_TIM4->CNT;
+    return encoder_get_secondary();
 }
 
 uint32_t encoder_get_secondary(void)
