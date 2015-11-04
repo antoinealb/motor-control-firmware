@@ -3,11 +3,13 @@ from fabric.api import *
 MASTER_BOARD = {
     'debra': '10.0.10.2',
     'caprica': '10.0.20.2',
+    'goldorak': '192.168.3.20',
 }
 
 MOTOR_BOARDS = {
     'debra': [20, 21, 29, 31, 32, 22, 23, 24],  # right: 25, 27, 28
     'caprica': [],
+    'goldorak': [41, 50],
 }
 
 
@@ -23,6 +25,9 @@ def nastya():
 
 def localhost():
     env.hosts += ['localhost']
+
+def goldorak():
+    env.hosts += ['goldorak']
 
 
 def build():
@@ -65,7 +70,6 @@ def read_config():
     """
     Reads the config of all connected boards.
     """
-    reboot()
     command = "python3 can-bootloader/client/bootloader_read_config.py"
     command += " --tcp {}".format(MASTER_BOARD[env.host])
     command += " --all"
